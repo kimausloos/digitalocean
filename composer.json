@@ -1,0 +1,22 @@
+{
+    "name": "thanatos/digitalocean",
+    "type": "library",
+    "description": "Service bundle for the DigitalOcean API",
+    "keywords": ["digitalocean", "api"],
+    "homepage": "http://github.com/kimausloos/digitalocean",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Kim Ausloos",
+            "email": "kim@thanatos.be"
+        }
+    ],
+    "require": {
+        "guzzle/guzzle": "~3.1"
+    },
+    "autoload": {
+        "psr-0": {
+            "Thanatos\\DigitalOceanBundle": "src/"
+        }
+    }
+}

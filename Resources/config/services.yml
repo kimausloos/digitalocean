@@ -1,0 +1,7 @@
+parameters:
+    thanatos_digital_ocean.class:      Thanatos\DigitalOceanBundle\Service\DigitalOceanService
+
+services:
+    thanatos_digital_ocean:
+        class:        "%thanatos_digital_ocean.class%"
+        arguments:    [%digitalocean.clientid%, %digitalocean.apikey%]
