@@ -87,7 +87,11 @@ class DigitalOceanService
 		} catch (BadResponseException $e) {
 			throw new \Exception("Error Processing Request");
 		}
-		
+
+		if('ERROR' === $response['status']) {
+			throw new \Exception("The api returned status ERROR: " . $response['description']);
+		}
+
 		return $response['droplets'];
 	}
 
@@ -107,6 +111,10 @@ class DigitalOceanService
 			throw new \Exception("Error Processing Request");
 		}
 		
+		if('ERROR' === $response['status']) {
+			throw new \Exception("The api returned status ERROR: " . $response['description']);
+		}
+
 		return $response['droplet'];
 	}
 
@@ -126,6 +134,10 @@ class DigitalOceanService
 			throw new \Exception("Error Processing Request");
 		}
 		
+		if('ERROR' === $response['status']) {
+			throw new \Exception("The api returned status ERROR: " . $response['description']);
+		}
+
 		return ($response['status']=='OK')?true:false;
 	}
 
@@ -145,6 +157,10 @@ class DigitalOceanService
 			throw new \Exception("Error Processing Request");
 		}
 		
+		if('ERROR' === $response['status']) {
+			throw new \Exception("The api returned status ERROR: " . $response['description']);
+		}
+
 		return ($response['status']=='OK')?true:false;
 	}
 
@@ -162,6 +178,10 @@ class DigitalOceanService
 			$response = $this->getClient()->get('droplets/'.$dropletId.'/shutdown')->send()->json();
 		} catch (BadResponseException $e) {
 			throw new \Exception("Error Processing Request");
+		}
+
+		if('ERROR' === $response['status']) {
+			throw new \Exception("The api returned status ERROR: " . $response['description']);
 		}
 		
 		return ($response['status']=='OK')?true:false;
@@ -182,6 +202,10 @@ class DigitalOceanService
 		} catch (BadResponseException $e) {
 			throw new \Exception("Error Processing Request");
 		}
+
+		if('ERROR' === $response['status']) {
+			throw new \Exception("The api returned status ERROR: " . $response['description']);
+		}
 		
 		return ($response['status']=='OK')?true:false;
 	}
@@ -201,6 +225,10 @@ class DigitalOceanService
 		} catch (BadResponseException $e) {
 			throw new \Exception("Error Processing Request");
 		}
+
+		if('ERROR' === $response['status']) {
+			throw new \Exception("The api returned status ERROR: " . $response['description']);
+		}
 		
 		return ($response['status']=='OK')?true:false;
 	}
@@ -219,6 +247,10 @@ class DigitalOceanService
 			$response = $this->getClient()->get('droplets/'.$dropletId.'/destroy')->send()->json();
 		} catch (BadResponseException $e) {
 			throw new \Exception("Error Processing Request");
+		}
+
+		if('ERROR' === $response['status']) {
+			throw new \Exception("The api returned status ERROR: " . $response['description']);
 		}
 		
 		return ($response['status']=='OK')?true:false;
