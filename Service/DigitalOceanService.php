@@ -256,4 +256,74 @@ class DigitalOceanService
 		return ($response['status']=='OK')?true:false;
 	}
 
+
+	/**
+	 * Fetch available droplet types
+	 * 
+	 * @return array
+	 * @throws \Exception
+	 */
+	public function getSizes() 
+	{
+
+		try {
+			$response = $this->getClient()->get('sizes')->send()->json();
+		} catch (BadResponseException $e) {
+			throw new \Exception("Error Processing Request");
+		}
+
+		if('ERROR' === $response['status']) {
+			throw new \Exception("The api returned status ERROR: " . $response['description']);
+		}
+		
+		return $response['sizes'];
+	}
+
+
+	/**
+	 * Gets the size ID by string, ex: 512MB, 2gb, ...
+	 *
+	 * @param $size
+	 * @return int
+	 * @throws \Exception
+	 */
+	public function getSizeByString($size)
+	{
+		$availableSizes = $this->getSizes();
+		if($availableSizes) {
+			$size = array_filter($availableSizes, function($element) use ($size) {
+				if(strtolower($element['name']) == strtolower($size)) {
+					return true;
+				}
+				return false;
+			});
+			if(is_array($size)) {
+				return array_shift($size);
+			}
+			
+			throw new \Exception("No size found with the description '".$size."'");
+		}
+	}
+
+
+	/**
+	 * Fetch available regions
+	 * 
+	 * @return array
+	 * @throws \Exception
+	 */
+	public function getRegions() 
+	{
+		try {
+			$response = $this->getClient()->get('regions')->send()->json();
+		} catch (BadResponseException $e) {
+			throw new \Exception("Error Processing Request");
+		}
+
+		if('ERROR' === $response['status']) {
+			throw new \Exception("The api returned status ERROR: " . $response['description']);
+		}
+		
+		return $response['regions'];
+	}
 }
